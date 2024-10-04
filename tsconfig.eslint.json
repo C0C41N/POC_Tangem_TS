@@ -1,0 +1,16 @@
+{
+  "extends": "./tsconfig.json",
+  "exclude": [
+    "node_modules",
+
+    ".github",
+    ".husky",
+
+    "dist",
+    "migrations",
+
+    "eslint.config.mjs",
+    "package.json",
+    "src/shared/acl/acl.service.ts"
+  ]
+}
