@@ -2,7 +2,7 @@ import { Buffer } from 'node:buffer'
 
 import { ec as EC } from 'elliptic'
 
-import { uncompressPublicKey } from './address'
+import { decompressPublicKey } from './address'
 
 const secp256k1 = new EC('secp256k1')
 
@@ -22,7 +22,7 @@ export function signatureHex64To65(signatureHex64: string, trxId: string, public
 
   const { r, s } = extractRS(signatureHex64).buffer
 
-  const publicKeyHex = uncompressPublicKey(publicKeyBase58).toString('hex')
+  const publicKeyHex = decompressPublicKey(publicKeyBase58).toString('hex')
 
   const trxIdBuffer = Buffer.from(trxId, 'hex')
 
