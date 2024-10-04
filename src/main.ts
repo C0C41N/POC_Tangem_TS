@@ -1,6 +1,7 @@
 import { TronWeb } from 'tronweb'
 
-import { publicKeyToAddress } from './address'
+import { publicKeyToAddress } from './tron/address'
+import { signatureHex64To65 } from './tron/signature'
 import { prompt } from './utils/prompt'
 
 const tronWeb = new TronWeb({ fullHost: 'https://nile.trongrid.io', privateKey: '' })
@@ -58,9 +59,10 @@ async function main() {
 
   const transaction = await createTransaction(fromAddress, toAddress, amount)
 
-  const signedHex = await prompt('Enter signed hex: ')
+  const signedHex64 = await prompt('Enter signed hex: ')
+  const signedHex65 = signatureHex64To65(signedHex64, transaction.txID, fromPublicKey)
 
-  await signAndBroadcastTransaction(transaction, signedHex)
+  await signAndBroadcastTransaction(transaction, signedHex65)
 
 }
 
